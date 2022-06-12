@@ -4,6 +4,7 @@ import { read } from "./fs/read.js";
 import { remove } from "./fs/delete.js";
 import { rename as customRename } from "./fs/rename.js";
 import { create as createFileCUston } from "./fs/create.js";
+import { calculateHash } from "./hash/calcHash.js";
 import { copy as copyFile } from "./fs/copy.js";
 import os from "os";
 import readline from "readline";
@@ -61,6 +62,11 @@ const handleUserCommand = (cCommand) => {
       break;
     case "rm":
       remove(sPath);
+    case "hash":
+      calculateHash(sPath).then(function (val) {
+        console.log(val);
+      });
+      break;
     default:
       console.log("Invalid input");
   }
