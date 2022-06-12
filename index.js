@@ -1,8 +1,10 @@
 import { parseArgs } from "./args.js";
 import { list } from "./fs/list.js";
 import { read } from "./fs/read.js";
+import { create } from "./fs/create.js";
 import os from "os";
 import readline from "readline";
+
 
 let sCommand = "";
 let sUserName;
@@ -27,15 +29,19 @@ const changeDir = (sPath) => {
 
 const handleUserCommand = (cCommand) => {
   let sCommandSanytized = sCommand.split(" ")[0].trim();
+  let sPath = sCommand.split(" ")[1].trim();
   switch (sCommandSanytized) {
     case "up":
       changeDir("../");
       break;
     case "cd":
-      changeDir("." + sCommand.split(" ")[1].trim());
+      changeDir("." + sPath);
       break;
     case "cat":
-      read(sCommand.split(" ")[1].trim());
+      read(sPath);
+      break;
+    case "add":
+      create(sPath);
       break;
     case "ls":
       list();
