@@ -1,21 +1,15 @@
-import { existsSync, rename as renameFs } from 'fs';
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
+import { existsSync, rename as renameFs } from "fs";
 
-export const rename = async() => {
-    const __dirname = dirname(fileURLToPath(
-        import.meta.url));
-    let src = join(__dirname, './files/wrongFilename.txt');
-    let dest = join(__dirname, './files/properFilename.md');
+export const rename = async (srcName, destName) => {
+  let src = process.cwd() + "/" + srcName;
+  let dest = process.cwd() + "/" + destName;
 
-    if (!existsSync(src) || existsSync(dest)) {
-        throw new Error('FS operation failed')
-    }
+  if (!existsSync(src) || existsSync(dest)) {
+    throw new Error("FS operation failed");
+  }
 
-    renameFs(src, dest, (err) => {
-        if (err) throw err;
-        console.log('Rename complete!');
-    });
+  renameFs(src, dest, (err) => {
+    if (err) throw err;
+    console.log("Rename complete!");
+  });
 };
-
-rename();

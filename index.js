@@ -1,10 +1,10 @@
 import { parseArgs } from "./args.js";
 import { list } from "./fs/list.js";
 import { read } from "./fs/read.js";
-import { create } from "./fs/create.js";
+import { rename as customRename } from "./fs/rename.js";
+import { create as createFileCUston } from "./fs/create.js";
 import os from "os";
 import readline from "readline";
-
 
 let sCommand = "";
 let sUserName;
@@ -28,8 +28,10 @@ const changeDir = (sPath) => {
 };
 
 const handleUserCommand = (cCommand) => {
-  let sCommandSanytized = sCommand.split(" ")[0].trim();
-  let sPath = sCommand.split(" ")[1].trim();
+  let aParams = sCommand.split(" ");
+  let sCommandSanytized = aParams[0].trim();
+  let sPath = aParams[1] ? aParams[1].trim() : "";
+  let sPathDest = aParams[2] ? aParams[2].trim() : "";
   switch (sCommandSanytized) {
     case "up":
       changeDir("../");
@@ -41,7 +43,10 @@ const handleUserCommand = (cCommand) => {
       read(sPath);
       break;
     case "add":
-      create(sPath);
+      createFileCUston(sPath);
+      break;
+    case "rename":
+      customRename(sPath, sPathDest);
       break;
     case "ls":
       list();
