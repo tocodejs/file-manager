@@ -1,20 +1,14 @@
-import { existsSync, unlink } from 'fs';
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
+import { existsSync, unlink } from "fs";
 
-export const remove = async() => {
-    const __dirname = dirname(fileURLToPath(
-        import.meta.url));
-    const src = join(__dirname, './files/fileToRemove.txt');
+export const remove = async (srcName) => {
+  const src = process.cwd() + "/" + srcName;
 
-    if (!existsSync(src)) {
-        throw new Error('FS operation failed')
-    }
+  if (!existsSync(src)) {
+    throw new Error("FS operation failed");
+  }
 
-    unlink(src, (err) => {
-        if (err) throw err;
-        console.log('Remove complete!');
-    });
+  unlink(src, (err) => {
+    if (err) throw err;
+    console.log("Remove complete!");
+  });
 };
-
-remove();

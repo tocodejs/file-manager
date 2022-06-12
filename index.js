@@ -1,6 +1,7 @@
 import { parseArgs } from "./args.js";
 import { list } from "./fs/list.js";
 import { read } from "./fs/read.js";
+import { remove } from "./fs/delete.js";
 import { rename as customRename } from "./fs/rename.js";
 import { create as createFileCUston } from "./fs/create.js";
 import { copy as copyFile } from "./fs/copy.js";
@@ -58,6 +59,8 @@ const handleUserCommand = (cCommand) => {
     case "mv":
       copyFile(sPath, sPathDest, true);
       break;
+    case "rm":
+      remove(sPath);
     default:
       console.log("Invalid input");
   }
