@@ -26,9 +26,13 @@ const onExitHandler = () => {
 };
 
 const changeDir = (sPath) => {
-  if (sPath) {
-    process.chdir(sPath);
-    console.log(`You are currently in  ${process.cwd()}`);
+  try {
+    if (sPath) {
+      process.chdir(sPath);
+      console.log(`You are currently in  ${process.cwd()}`);
+    }
+  } catch (e) {
+    console.log("Error! Please provide a path as /dirname");
   }
 };
 
@@ -83,6 +87,7 @@ const handleUserCommand = (cCommand) => {
       break;
     case "rm":
       remove(sPath);
+      break;
     case "hash":
       calculateHash(sPath).then(function (val) {
         console.log(val);
@@ -99,6 +104,7 @@ const handleUserCommand = (cCommand) => {
       break;
     default:
       console.log("Invalid input");
+      break;
   }
 };
 

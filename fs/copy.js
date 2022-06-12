@@ -7,12 +7,16 @@ export const copy = async (srcName, destName, deleteSource) => {
   function errorHandler(err) {
     if (err) throw err;
   }
-  if (!existsSync(src) || existsSync(dest)) {
-    throw new Error("FS operation failed");
-  }
+  try {
+    if (!existsSync(src) || existsSync(dest)) {
+      throw new Error("FS operation failed");
+    }
 
-  copyFileSync(src, dest);
-  if (deleteSource) {
-    unlinkSync(src);
+    copyFileSync(src, dest);
+    if (deleteSource) {
+      unlinkSync(src);
+    }
+  } catch {
+    console.log("FS operation failed");
   }
 };

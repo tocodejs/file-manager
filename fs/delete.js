@@ -1,14 +1,17 @@
-import { existsSync, unlink } from "fs";
+import { existsSync } from "fs";
+import { unlink } from "fs/promises";
 
 export const remove = async (srcName) => {
   const src = process.cwd() + "/" + srcName;
 
   if (!existsSync(src)) {
-    throw new Error("FS operation failed");
+    console.log("FS operation failed");
+    return;
   }
-
-  unlink(src, (err) => {
-    if (err) throw err;
+  try {
+    await unlink(src);
     console.log("Remove complete!");
-  });
+  } catch (e) {
+    console.log("FS operation failed");
+  }
 };
