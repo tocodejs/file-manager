@@ -3,6 +3,7 @@ import { list } from "./fs/list.js";
 import { read } from "./fs/read.js";
 import { rename as customRename } from "./fs/rename.js";
 import { create as createFileCUston } from "./fs/create.js";
+import { copy as copyFile } from "./fs/copy.js";
 import os from "os";
 import readline from "readline";
 
@@ -45,11 +46,14 @@ const handleUserCommand = (cCommand) => {
     case "add":
       createFileCUston(sPath);
       break;
-    case "rename":
+    case "rn":
       customRename(sPath, sPathDest);
       break;
     case "ls":
       list();
+      break;
+    case "cp":
+      copyFile(sPath, sPathDest);
       break;
     default:
       console.log("Invalid input");
