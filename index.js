@@ -53,7 +53,10 @@ const handleUserCommand = (cCommand) => {
       list();
       break;
     case "cp":
-      copyFile(sPath, sPathDest);
+      copyFile(sPath, sPathDest, false);
+      break;
+    case "mv":
+      copyFile(sPath, sPathDest, true);
       break;
     default:
       console.log("Invalid input");

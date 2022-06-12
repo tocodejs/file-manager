@@ -1,6 +1,6 @@
-import { existsSync, copyFileSync } from "fs";
+import { existsSync, copyFileSync, unlinkSync } from "fs";
 
-export const copy = async (srcName, destName) => {
+export const copy = async (srcName, destName, deleteSource) => {
   let src = process.cwd() + "/" + srcName;
   let dest = process.cwd() + "/" + destName;
 
@@ -12,4 +12,7 @@ export const copy = async (srcName, destName) => {
   }
 
   copyFileSync(src, dest);
+  if (deleteSource) {
+    unlinkSync(src);
+  }
 };
