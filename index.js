@@ -2,6 +2,8 @@ import { parseArgs } from "./args.js";
 import { list } from "./fs/list.js";
 import { read } from "./fs/read.js";
 import { remove } from "./fs/delete.js";
+import { compress } from "./zip/compress.js";
+import { decompress } from "./zip/decompress.js";
 import { rename as customRename } from "./fs/rename.js";
 import { create as createFileCUston } from "./fs/create.js";
 import { calculateHash } from "./hash/calcHash.js";
@@ -88,6 +90,12 @@ const handleUserCommand = (cCommand) => {
       break;
     case "os":
       showOsInfo(sPath);
+      break;
+    case "compress":
+      compress(sPath, sPathDest);
+      break;
+    case "decompress":
+      decompress(sPath, sPathDest);
       break;
     default:
       console.log("Invalid input");
