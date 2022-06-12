@@ -1,5 +1,6 @@
 import { parseArgs } from "./args.js";
 import { list } from "./fs/list.js";
+import { read } from "./fs/read.js";
 import os from "os";
 import readline from "readline";
 
@@ -33,7 +34,8 @@ const handleUserCommand = (cCommand) => {
     case "cd":
       changeDir("." + sCommand.split(" ")[1].trim());
       break;
-    case "cat path_to_file":
+    case "cat":
+      read(sCommand.split(" ")[1].trim());
       break;
     case "ls":
       list();

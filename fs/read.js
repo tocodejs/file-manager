@@ -1,20 +1,13 @@
-import { existsSync } from 'fs';
-import { readFile } from 'fs/promises';
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
+import { existsSync } from "fs";
+import { readFile } from "fs/promises";
 
-export const read = async() => {
-    const __dirname = dirname(fileURLToPath(
-        import.meta.url));
+export const read = async (sFileName) => {
+  const src = process.cwd() + "/" + sFileName;
 
-    const src = join(__dirname, '/files/fileToRead.txt');
+  if (!existsSync(src)) {
+    throw new Error("FS operation failed");
+  }
 
-    if (!existsSync(src)) {
-        throw new Error('FS operation failed')
-    }
-
-    const data = await readFile(src);
-    console.log(data.toString());
+  const data = await readFile(src);
+  console.log(data.toString());
 };
-
-read();
