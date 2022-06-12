@@ -30,6 +30,25 @@ const changeDir = (sPath) => {
   }
 };
 
+const showOsInfo = (sArg) => {
+  switch (sArg) {
+    case "--EOL":
+      console.log(JSON.stringify(os.EOL));
+      break;
+    case "--cpus":
+      console.log(os.cpus());
+      break;
+    case "--username":
+      console.log(os.userInfo().username);
+      break;
+    case "--homedir":
+      console.log(os.homedir());
+      break;
+    default:
+      console.log("Unknown arg to handle");
+  }
+};
+
 const handleUserCommand = (cCommand) => {
   let aParams = sCommand.split(" ");
   let sCommandSanytized = aParams[0].trim();
@@ -66,6 +85,9 @@ const handleUserCommand = (cCommand) => {
       calculateHash(sPath).then(function (val) {
         console.log(val);
       });
+      break;
+    case "os":
+      showOsInfo(sPath);
       break;
     default:
       console.log("Invalid input");
